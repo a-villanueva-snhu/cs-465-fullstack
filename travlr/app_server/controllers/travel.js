@@ -1,15 +1,32 @@
-const Trip = require('../models/travlr');
+const tripsEndpoint = 'http://localhost:3000/api/trips';
 
-/* Get Travel View */
-const travel = async (req, res) => {
-    try {
-        const trips = await Trip.find({});
-        res.render('travel', { title: 'Travlr Getaways', trips });
-    } catch (err) {
-        console.error(err);
-        res.status(500).render('error', { message: 'Error fetching trips' });
+const options = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
     }
 };
+
+const travel = async function (req, res, next) {
+    await fetch(tripsEndpoint, options)
+        .then(res => res.json())
+        .then((json) => {
+            let message = null;
+            if(!json instanceof Array) {
+                message = 'API lookup error: Unexpected response format';
+                json = [];
+            }
+            else {
+                if (json.length === 0) {
+                    message = 'No trips available at the moment.';
+                }
+            }
+            res.render('travel', { title: 'Travlr Getaways', trips: json, message: message });
+        })
+        .catch((err) => res.status(500).send(err.message));
+};
+
+
 
 module.exports = {
     travel

@@ -69,7 +69,6 @@ process.on('SIGTERM', () => {
     });
 });
 
-// Connect to the database
 connect();
 
 // Import mongoose schemas and models
