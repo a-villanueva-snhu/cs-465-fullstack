@@ -11,6 +11,9 @@ var mealsRouter = require('./app_server/routes/meals');
 
 var handlebars = require('hbs');
 
+// Database connection
+require('./app_server/models/db');
+
 var app = express();
 
 // Register handlebars partials
