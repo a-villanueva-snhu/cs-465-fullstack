@@ -1,0 +1,21 @@
+[
+    {
+        "name": "Seafood Special",
+        "image": "seafoods.jpg",
+        "description": "Fried Salmon Special",
+        "overview": "A delicious fried salmon dish with a side of vegetables and rice."
+    },
+    {
+        "name": "Sumptuous Desserts",
+        "image": "desserts.jpg",
+        "description": "Choco Ice Cream Sandwich",
+        "overview": "A delightful chocolate ice cream sandwich with a crispy cookie base."
+    },
+    {
+        "name": "Buffet",
+        "image": "buffet.jpg",
+        "description": "Mixed Buffet",
+        "overview": "A variety of dishes including meats, vegetables, and desserts to satisfy all tastes."
+    }
+
+]
