@@ -1,4 +1,4 @@
-import { JsonPipe } from "@angular/common"
+// import { JsonPipe } from "@angular/common"
 
 export const trips = [
     {   
