@@ -42,6 +42,22 @@ const tripsUpdateTrip = async (req, res) => {
 
 };
 
+// DELETE /trips/:tripCode - delete a trip by code
+const tripsDeleteTrip = async (req, res) => {
+    const q = await Model.findOneAndDelete({ code: req.params.tripCode }).exec();
+
+    if (!q) {
+        // database returned no data - something went wrong
+        return res.status(400)
+            .json({ error: 'Unable to delete trip' });
+    } else {
+        // successfully deleted trip
+        return res.status(204).json();  // return no content
+    }
+
+    // uncomment for debugging
+    // console.log('Deleted trip: ' + JSON.stringify(q));
+};
 
 
 // POST /trips - add a new trip
@@ -99,5 +115,6 @@ module.exports = {
     tripsList,
     findTripByCode,
     tripsAddTrip,
-    tripsUpdateTrip
+    tripsUpdateTrip,
+    tripsDeleteTrip
 };

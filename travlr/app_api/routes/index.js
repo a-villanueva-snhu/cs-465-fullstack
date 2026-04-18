@@ -22,5 +22,9 @@ router
     .get(tripsController.findTripByCode)  // GET method route for trips by code - reuquires tripCode parameter
     .put(tripsController.tripsUpdateTrip); // PUT method route for updating a trip - requires tripCode parameter
 
+// Delete method route for deleting a trip - requires tripCode parameter
+router
+    .route("/trips/:tripCode")
+    .delete(tripsController.tripsDeleteTrip); // DELETE method route for deleting a trip - requires tripCode parameter
 
     module.exports = router;
