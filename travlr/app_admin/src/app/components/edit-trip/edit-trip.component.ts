@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
-import { TripDataService } from '../services/trip-data.service';
-import { Trip } from '../models/trip';
+import { TripDataService } from '../../services/trip-data.service';
+import { Trip } from '../../models/trip';
 
 
 @Component({
@@ -19,6 +19,7 @@ export class EditTripComponent implements OnInit {
   trip!: Trip;
   submitted: boolean = false;
   message: string = '';
+  originalTripCode: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,6 +38,8 @@ export class EditTripComponent implements OnInit {
       return;
     }
 
+    this.originalTripCode = tripCode; // Store the original code
+
     console.log('EditTripComponent ngOnInit called');
     console.log('Trip code retrieved from stash: ' + tripCode);
 
@@ -54,7 +57,7 @@ export class EditTripComponent implements OnInit {
 
     this.tripDataService.getTrip(tripCode).subscribe({
       next: (value: Trip) => {
-        let tempStart = value.start.toString().split('T')[0]; // Extract the date part from the ISO string
+        let tempStart = new Date(value.start).toISOString().split('T')[0]; // Extract the date part from the ISO string
         
         // populate our record into the edit form
         this.editForm.patchValue(value);
@@ -80,13 +83,19 @@ export class EditTripComponent implements OnInit {
     this.submitted = true;
 
     if(this.editForm.valid) {
-      this.tripDataService.updateTrip(this.editForm.value).subscribe({
-        next: (data: any) => {
+      const formData = { ...this.editForm.value };
+      // Convert date string to Date object
+      if (formData.start) {
+        formData.start = new Date(formData.start);
+      }
+      
+      this.tripDataService.updateTrip(this.originalTripCode, formData).subscribe({
+        next: (data: Trip) => {
           console.log(data);
           this.router.navigate(['']);
         },
         error: (err: any) => {
-          console.error('Error updating trip:' + err);
+          console.error('Error updating trip:', err);
         }
       });
     }

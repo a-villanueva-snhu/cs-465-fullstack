@@ -1,2 +1,36 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<!DOCTYPE html>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Home - Travlr Getaways</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+	<div id="background">
+		<div id="page">
+			{{> header }}
+			<div id="contents">
+				<div class="box">
+					<div>
+						<div class="body">
+							<h1>{{title}}</h1>
+							<p>Welcome to Travlr Getaways! Discover amazing travel destinations and book your perfect vacation.</p>
+							<div class="featured">
+								<h2>Featured Destinations</h2>
+								<p>Explore our curated selection of premium travel packages designed for unforgettable experiences.</p>
+								<a href="/travel" class="button">View Travel Packages</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{> footer }}
+			<p>
+				© 2023 by Travlr Getaways. All Rights Reserved
+			</p>
+		</div>
+	</div>
+</body>
+</html>

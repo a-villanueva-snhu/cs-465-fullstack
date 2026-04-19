@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <label>Price Per Person:</label>
-            <input type="string" formControlName="perPerson"
+            <input type="text" formControlName="perPerson"
                 placeholder="Price Per Person" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['perPerson'].errors }" 
             >
@@ -72,10 +72,10 @@
             <label>Start:</label>
             <input type="date" formControlName="start"
                 class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['startDate'].errors }" 
+                [ngClass]="{ 'is-invalid': submitted && f['start'].errors }" 
             >
-            <div *ngIf="submitted && f['startDate'].errors">
-                <div *ngIf="f['startDate'].errors['required']">Trip Start Date is required.</div>
+            <div *ngIf="submitted && f['start'].errors">
+                <div *ngIf="f['start'].errors['required']">Trip Start Date is required.</div>
             </div>
         </div>
 

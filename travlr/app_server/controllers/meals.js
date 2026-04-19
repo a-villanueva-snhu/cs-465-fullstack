@@ -3,7 +3,7 @@ var meals = JSON.parse(fs.readFileSync('./data/meals.json', 'utf8'))
 
 /* Get Meals View */
 const mealsController = (req, res) => {
-    res.render('meals', { title: 'Travlr Getaways', meals });
+    res.render('meals', { title: 'Travlr Getaways', meals, active: 'meals' });
 };
 
 module.exports = {

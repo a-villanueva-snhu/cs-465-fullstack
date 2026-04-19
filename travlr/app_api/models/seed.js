@@ -1,3 +1,6 @@
+// The seed script populates the MongoDB database with 
+// initial test data from a JSON file.
+
 // bring in DB connection and trip schema
 const mongoose = require('./db');
 const Trip = require('./travlr');
@@ -6,11 +9,16 @@ const Trip = require('./travlr');
 var fs = require('fs');
 var trips = JSON.parse(fs.readFileSync('./data/trips.json', 'utf8'));
 
-// delete any existing trips, then create new ones using the seed data
+// Only seed if database is empty - do NOT delete existing data
 const seedDB = async () => {
-    await Trip.deleteMany({});
-    await Trip.insertMany(trips);
-    console.log("Database seeded!");
+    const count = await Trip.countDocuments({});
+    
+    if (count === 0) {
+        await Trip.insertMany(trips);
+        console.log("Database seeded with initial test data!");
+    } else {
+        console.log(`Database already contains ${count} trips. Skipping seed.`);
+    }
 };
 
 // close the connection when done

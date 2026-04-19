@@ -9,10 +9,10 @@ const options = {
 
 const travel = async function (req, res, next) {
     await fetch(tripsEndpoint, options)
-        .then(res => res.json())
+        .then(response => response.json())
         .then((json) => {
             let message = null;
-            if(!json instanceof Array) {
+            if(!(json instanceof Array)) {
                 message = 'API lookup error: Unexpected response format';
                 json = [];
             }
@@ -21,7 +21,7 @@ const travel = async function (req, res, next) {
                     message = 'No trips available at the moment.';
                 }
             }
-            res.render('travel', { title: 'Travlr Getaways', trips: json, message: message });
+            res.render('travel', { title: 'Travlr Getaways', trips: json, message: message, active: 'travel' });
         })
         .catch((err) => res.status(500).send(err.message));
 };

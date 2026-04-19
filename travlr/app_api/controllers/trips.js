@@ -9,32 +9,37 @@ const Model = mongoose.model('trips'); // retrieve model
 const tripsUpdateTrip = async (req, res) => {
 
     // uncomment for debugging
-    // console.log('Updating trip with code: ' + req.params.tripCode);
-    // console.log('Request body: ' + JSON.stringify(req.body));
+    console.log('Updating trip with code: ' + req.params.tripCode);
+    console.log('Request body: ' + JSON.stringify(req.body));
 
-    const q = await Model.findOneAndUpdate(
-        { code: req.params.tripCode }, // filter
-        {
-            code: req.body.code,
-            name: req.body.name,
-            length: req.body.length,
-            start: req.body.start,
-            resort: req.body.resort,
-            perPerson: req.body.perPerson,
-            image: req.body.image,
-            description: req.body.description
-        }, // update
-        { new: true } // options - return the updated document
-    ).exec();
+    try {
+        const q = await Model.findOneAndUpdate(
+            { code: req.params.tripCode }, // filter
+            {
+                code: req.body.code,
+                name: req.body.name,
+                length: req.body.length,
+                start: req.body.start,
+                resort: req.body.resort,
+                perPerson: req.body.perPerson,
+                image: req.body.image,
+                description: req.body.description
+            }, // update
+            { new: true } // options - return the updated document
+        ).exec();
 
-    if (!q) {
-        // database returned no data - something went wrong
-        return res.status(400)
-            .json({ error: 'Unable to update trip' });
-    } else {
-        // successfully updated trip
-        return res.status(201)
-            .json(q);  // return the updated trip
+        if (!q) {
+            // database returned no data - something went wrong
+            return res.status(400)
+                .json({ error: 'Unable to update trip - trip not found' });
+        } else {
+            // successfully updated trip
+            return res.status(201)
+                .json(q);  // return the updated trip
+        }
+    } catch (error) {
+        console.error('Error updating trip:', error);
+        return res.status(400).json({ error: 'Unable to update trip', details: error.message });
     }
 
     // uncomment for debugging
@@ -42,6 +47,22 @@ const tripsUpdateTrip = async (req, res) => {
 
 };
 
+// DELETE /trips/:tripCode - delete a trip by code
+const tripsDeleteTrip = async (req, res) => {
+    const q = await Model.findOneAndDelete({ code: req.params.tripCode }).exec();
+
+    if (!q) {
+        // database returned no data - something went wrong
+        return res.status(400)
+            .json({ error: 'Unable to delete trip' });
+    } else {
+        // successfully deleted trip
+        return res.status(204).json();  // return no content
+    }
+
+    // uncomment for debugging
+    // console.log('Deleted trip: ' + JSON.stringify(q));
+};
 
 
 // POST /trips - add a new trip
@@ -62,7 +83,7 @@ const tripsAddTrip = async (req, res) => {
     if (!q) {
         // database returned no data - something went wrong
         return res.status(400)
-            .json(err);
+            .json({ error: 'Unable to add trip' });
     } else {
         // successfully created new trip
         return res.status(201)
@@ -99,5 +120,6 @@ module.exports = {
     tripsList,
     findTripByCode,
     tripsAddTrip,
-    tripsUpdateTrip
+    tripsUpdateTrip,
+    tripsDeleteTrip
 };

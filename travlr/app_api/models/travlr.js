@@ -1,7 +1,10 @@
+// The trip model defines the structure of trip documents 
+// in the MongoDB database.
+
 const mongoose = require('mongoose');
 
 const tripSchema = new mongoose.Schema({
-    code: { type: String, required: true, index: true },
+    code: { type: String, required: true, unique: true, index: true },
     name: { type: String, required: true, index: true },
     length: { type: String, required: true },
     start: { type: Date, required: true },
