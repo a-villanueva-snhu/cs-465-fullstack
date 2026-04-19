@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
 import { TripDataService } from '../services/trip-data.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-add-trip',
@@ -18,7 +19,9 @@ export class AddTripComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private tripDataService: TripDataService) 
+    private tripDataService: TripDataService,
+    private authService: AuthenticationService
+  ) 
     {
     
     }
@@ -35,6 +38,11 @@ export class AddTripComponent implements OnInit {
       image: ['', Validators.required],
       description: ['', Validators.required]
     });
+  }
+
+  // Login check to conditionally show add trip form
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   public onSubmit(): void {

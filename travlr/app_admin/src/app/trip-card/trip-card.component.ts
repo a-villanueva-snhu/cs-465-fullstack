@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Trip } from '../models/trip';
 import { TripDataService } from '../services/trip-data.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-trip-card',
@@ -16,13 +17,19 @@ export class TripCardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private tripDataService: TripDataService
+    private tripDataService: TripDataService,
+    private authService: AuthenticationService
   ) { 
 
   }
 
   ngOnInit(): void {
 
+  }
+
+  // Check if the user is logged in to conditionally show edit and delete buttons
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   // Navigate to the edit trip page with the selected trip's code
@@ -57,7 +64,7 @@ export class TripCardComponent implements OnInit {
     } else {
       console.log('Trip deletion cancelled');
     }
-
-
   }
+
+
 }

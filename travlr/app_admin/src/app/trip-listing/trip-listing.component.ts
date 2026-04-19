@@ -5,6 +5,7 @@ import { TripCardComponent } from '../trip-card/trip-card.component';
 import { Trip } from '../models/trip';
 import { TripDataService } from '../services/trip-data.service';
 import { Route, Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-trip-listing',
@@ -22,9 +23,15 @@ export class TripListingComponent implements OnInit {
 
   constructor(
     private tripDataService: TripDataService, 
-    private router: Router
+    private router: Router,
+    private authService: AuthenticationService
     ) {
     console.log('TripListingComponent constructor called');
+  }
+
+  // Helper to check for logged in user to conditionally show add trip button
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   // CRUD: Create, Read, Update, Delete
