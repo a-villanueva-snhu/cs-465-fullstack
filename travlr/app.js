@@ -31,6 +31,11 @@ var app = express();
 // Register handlebars partials
 handlebars.registerPartials(path.join(__dirname, 'app_server', 'views', 'partials'));
 
+// Register handlebars helpers
+handlebars.registerHelper('eq', function(a, b) {
+    return a === b;
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'hbs');

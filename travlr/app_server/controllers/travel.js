@@ -21,7 +21,7 @@ const travel = async function (req, res, next) {
                     message = 'No trips available at the moment.';
                 }
             }
-            res.render('travel', { title: 'Travlr Getaways', trips: json, message: message });
+            res.render('travel', { title: 'Travlr Getaways', trips: json, message: message, active: 'travel' });
         })
         .catch((err) => res.status(500).send(err.message));
 };
