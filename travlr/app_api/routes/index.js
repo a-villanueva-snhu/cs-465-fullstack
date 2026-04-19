@@ -1,5 +1,5 @@
 const express = require('express');
-// const { authenticateJWT } = require('../config/jwt');
+// const { authenticateJWT } = require('../config/jwt');  // Became function in this file for simplicity
 const router = express.Router();
 
 const tripsController = require('../controllers/trips');
@@ -50,18 +50,25 @@ router.route('/login').post(authController.loginUser);
 // Trips endpoint routes
 router
     .route('/trips')
-    .get(tripsController.tripsList)
+    .get(tripsController.tripsList)  // GET is public, no auth required
     .post(authenticateJWT, tripsController.tripsAddTrip);
 
 // Trip by code endpoint routes
 router
     .route('/trips/:tripCode')
-    .get(tripsController.findTripByCode)
+    .get(tripsController.findTripByCode)  // GET is public, no auth required
     .put(authenticateJWT, tripsController.tripsUpdateTrip)
     .post(authenticateJWT, tripsController.tripsAddTrip) // Allow adding new trip with POST to /trips/:tripCode
     .delete(authenticateJWT, tripsController.tripsDeleteTrip);
 
-// // CRUD routes for users (admin only)
+// CRUD routes for users (admin only)
+
+// UNIMPLEMENTED - for future admin user management features
+// router
+//     .route('/users')
+//     .get(authenticateJWT, authController.listUsers)
+//     .post(authController.registerUser); // Allow registration without auth for simplicity
+
 // router
 //     .route('/users')
 //     .get(authenticateJWT, authController.listUsers)

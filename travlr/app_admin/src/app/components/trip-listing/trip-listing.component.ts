@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { trips } from '../data/trips';  
 import { TripCardComponent } from '../trip-card/trip-card.component';
-import { Trip } from '../models/trip';
-import { TripDataService } from '../services/trip-data.service';
+import { Trip } from '../../models/trip';
+import { TripDataService } from '../../services/trip-data.service';
 import { Route, Router } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-trip-listing',

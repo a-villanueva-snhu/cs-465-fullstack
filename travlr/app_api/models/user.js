@@ -1,3 +1,10 @@
+// The user model defines the structure of user documents 
+// in the MongoDB database and includes methods for password 
+// hashing, validation, and JWT generation. It uses Mongoose 
+// for schema definition and interaction with the database, 
+// Crypto for secure password handling, and JSON Web Token for 
+// authentication.
+
 const { hash } = require('crypto');
 const mongoose = require('mongoose');
 

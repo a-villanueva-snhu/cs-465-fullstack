@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
-import { TripDataService } from '../services/trip-data.service';
-import { Trip } from '../models/trip';
+import { TripDataService } from '../../services/trip-data.service';
+import { Trip } from '../../models/trip';
 
 
 @Component({

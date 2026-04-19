@@ -1,3 +1,10 @@
+// The db.js file sets up the connection to the MongoDB 
+// database using Mongoose ODM. It defines the connection 
+// string, handles connection events for logging and 
+// graceful shutdown, and imports the Mongoose schemas 
+// and models for trips and users. This file is required at 
+// the start of the application to ensure the database connection.
+
 const mongoose = require('mongoose');
 const host = process.env.DB_HOST || '127.0.0.1';
 const dbURI = `mongodb://${host}/travlr`;

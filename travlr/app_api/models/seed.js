@@ -1,3 +1,6 @@
+// The seed script populates the MongoDB database with 
+// initial test data from a JSON file.
+
 // bring in DB connection and trip schema
 const mongoose = require('./db');
 const Trip = require('./travlr');

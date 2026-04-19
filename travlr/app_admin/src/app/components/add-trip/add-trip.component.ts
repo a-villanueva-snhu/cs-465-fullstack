@@ -2,8 +2,8 @@ import { Component, destroyPlatform, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
-import { TripDataService } from '../services/trip-data.service';
-import { AuthenticationService } from '../services/authentication.service';
+import { TripDataService } from '../../services/trip-data.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-add-trip',
